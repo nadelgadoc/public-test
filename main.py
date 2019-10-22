@@ -21,6 +21,9 @@ from machine import reset
 from machine import ADC
 from machine import disable_irq,enable_irq
 from machine import reset_cause
+
+VERSION = 20191022
+
 import playTone
 import config
 import custom_webserver
@@ -29,7 +32,6 @@ import test_helper
 reset_reason_list = ['*','PWRON_RESET','HARD_RESET','WDT_RESET','DEEPSLEEP_RESET','SOFT_RESET']
 net = locals()['net']
 
-VERSION = 20191022
 LED_BLUE = 4
 LED_RED = 16
 LED_GREEN = 17

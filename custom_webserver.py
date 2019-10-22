@@ -3,8 +3,6 @@ import network
 import machine
 import socket
 
-t_version = locals()['VERSION']
-
 class server:
     
     def config_page(self, t_custom_name, t_ssid, mqtt_server, mqtt_port, mqtt_user, mqtt_pass):
@@ -45,7 +43,7 @@ class server:
             <input type="submit" value="Guardar" class="button">
             </form>
             <a href="/?resetear"><button class="button">Resetear</button></a>
-            <p><h3 align='right'>Version: """ + t_version + """</h3></p>
+            <p><h3 align='right'>Version: """ + str(locals()['VERSION']) + """</h3></p>
             </body></html>"""
         return html
 
