@@ -61,7 +61,8 @@ class main:
         raise Exception('Task timedout!')
 
     def run(self):
-        self.led_red.off()
+        if not self.disable_status_led:
+            self.led_red.off()
         #self.irrcv._routine()
         msg = self.mqtt_client.getMsg()
         #if type(msg).__name__ == 'list':
@@ -340,11 +341,13 @@ class main:
         #interpreter = interpreter.interpreter()
         self.boot_time = utime.time()
         self.config_handler = config.local()
-        self.receiver_enabled,self.external_sensor_enabled = self.config_handler.getSettings(['receiver_enabled','external_sensor_enabled'])
+        self.receiver_enabled,self.external_sensor_enabled,self.disable_status_led = self.config_handler.getSettings(['receiver_enabled','external_sensor_enabled','disable_status_led'])
         if type(self.receiver_enabled) != bool:
             self.receiver_enabled = False
         if type(self.external_sensor_enabled) != bool:
             self.external_sensor_enabled = False
+        if type(self.disable_status_led) != bool:
+            self.disable_status_led = False
         # t_disable_local_config = self.config_handler.getSettings(['disable_local_config'])
         # if type(t_disable_local_config) != bool:
         #     t_disable_local_config = False
