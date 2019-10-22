@@ -183,8 +183,8 @@ class main:
                     try:
                         os.mkdir(dirs[i])
                         break
-                    except OSError, e:
-                        if e.errno != os.errno.EEXIST:
+                    except OSError as e:
+                        if e != OSError(17):
                             raise   
                         pass
                 t_timer = Timer(1)
