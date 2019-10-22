@@ -206,10 +206,13 @@ class main:
                     sys.print_exception(e)
                     self.msg_to_publish.update({ 'download_file' : 'Failed' })
                     self.led_red.off()
-                    self.player.play(2489, 200)
-                    utime.sleep(0.2)
-                    self.player.play(2489, 200)
-                    utime.sleep(0.2)
+                    self.led_blue.on()
+                    self.player.play(2489, 100)
+                    utime.sleep(0.1)
+                    self.player.play(2489, 100)
+                    utime.sleep(0.1)
+                    self.player.play(2489, 100)
+                    utime.sleep(0.1)
                 t_timer.deinit()
             if 'listdir' in msg:
                 t_dir = msg['listdir']
