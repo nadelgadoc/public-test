@@ -199,15 +199,16 @@ class main:
                     _file.close()
                     t_timer.deinit()
                     self.msg_to_publish.update({ 'donwload_file' : 'Done:' + str(written_bytes) })
-                    self.player.play(2794, 200)
-                    utime.sleep(0.1)
-                    self.player.play(2794, 200)
+                    self.player.play(2489, 100)
+                    utime.sleep(0.05)
+                    self.player.play(2489, 100)
+                    utime.sleep(0.2)
                 except Exception as e:
                     print('****Error downloading file')
                     sys.print_exception(e)
                     self.msg_to_publish.update({ 'download_file' : 'Failed' })
                     self.player.play(2489, 500)
-                    utime.sleep(0.1)
+                    utime.sleep(0.2)
             if 'listdir' in msg:
                 t_dir = msg['listdir']
                 if type(t_dir) == str:
