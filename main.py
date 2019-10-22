@@ -180,7 +180,13 @@ class main:
                 print('Destination: ', save_to)
                 dirs = save_to.split('/')
                 for i in range(len(dirs)-1):
-                    os.mkdir(dirs[i])
+                    try:
+                        os.mkdir(dirs[i])
+                        break
+                    except OSError, e:
+                        if e.errno != os.errno.EEXIST:
+                            raise   
+                        pass
                 t_timer = Timer(1)
                 t_timer.init(period=10000, mode=Timer.ONE_SHOT, callback=self.raiseTimeout)
                 try:
@@ -219,7 +225,7 @@ class main:
                 t_dir = msg['listdir']
                 if type(t_dir) == str:
                     dirs = os.listdir(t_dir)
-                    self.msg_to_publish.update({ 'listdir' : { '/' + t_dir : dirs } })
+                    self.msg_to_publish.update({ 'listdir' : { t_dir : dirs } })
                 else:
                     dirs = os.listdir()
                     self.msg_to_publish.update({ 'listdir' : { '/' : dirs } })
