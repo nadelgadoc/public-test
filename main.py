@@ -180,9 +180,9 @@ class main:
                 dirs = save_to.split('/')
                 for i in range(len(dirs)-1):
                     os.mkdir(dirs[i])
+                t_timer = Timer(1)
+                t_timer.init(period=10000, mode=Timer.ONE_SHOT, callback=self.raiseTimeout)
                 try:
-                    t_timer = Timer(1)
-                    t_timer.init(period=10000, mode=Timer.ONE_SHOT, callback=self.raiseTimeout)
                     print('Downloading')
                     t_request = urequests.get(url)
                     print('Reading content text')
@@ -197,7 +197,6 @@ class main:
                     written_bytes = _file.write(_content)
                     print()
                     _file.close()
-                    t_timer.deinit()
                     self.msg_to_publish.update({ 'donwload_file' : 'Done:' + str(written_bytes) })
                     self.player.play(2489, 100)
                     utime.sleep(0.05)
@@ -209,6 +208,7 @@ class main:
                     self.msg_to_publish.update({ 'download_file' : 'Failed' })
                     self.player.play(2489, 500)
                     utime.sleep(0.2)
+                t_timer.deinit()
             if 'listdir' in msg:
                 t_dir = msg['listdir']
                 if type(t_dir) == str:
