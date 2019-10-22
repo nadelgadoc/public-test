@@ -180,13 +180,17 @@ class main:
                 print('Destination: ', save_to)
                 dirs = save_to.split('/')
                 for i in range(len(dirs)-1):
+                    print('Creating dirs')
                     try:
                         os.mkdir(dirs[i])
+                        print('Dir \"' + dirs[i] + '\" created')
                         break
                     except OSError as e:
-                        if e != OSError(17):
-                            raise   
-                        pass
+                        if e == OSError(17):
+                            print('Directory already exist')
+                    except Exception as e:
+                        print('Error creating directory')
+                        sys.print_exception(e)
                 t_timer = Timer(1)
                 t_timer.init(period=10000, mode=Timer.ONE_SHOT, callback=self.raiseTimeout)
                 try:
